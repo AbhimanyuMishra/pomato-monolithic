@@ -3,5 +3,8 @@ package pomato.app.customer.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import pomato.app.customer.Entity.Users;
 
-public interface CustomerRepository extends JpaRepository<Users, Long> {
+import java.util.Optional;
+
+public interface UserRepository extends JpaRepository<Users, Long> {
+    Optional<Users> findByEmail(String email);
 }
