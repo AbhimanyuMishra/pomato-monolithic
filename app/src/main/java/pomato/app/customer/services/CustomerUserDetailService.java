@@ -21,7 +21,7 @@ public class CustomerUserDetailService implements UserDetailsService {
             throws UsernameNotFoundException {
 
         Users user = userRepository
-                .findByEmail(email)
+                .findByEmailIgnoreCase(email)
                 .orElseThrow(() ->
                         new UsernameNotFoundException(
                                 "Invalid email or password"));
@@ -29,7 +29,7 @@ public class CustomerUserDetailService implements UserDetailsService {
         return User.builder()
                 .username(user.getEmail())
                 .password(user.getPassword())
-                .roles(user.getRole().name())
+                .roles(user.getRoles().stream().map(Enum::name).toArray(String[]::new))
                 .build();
     }
 

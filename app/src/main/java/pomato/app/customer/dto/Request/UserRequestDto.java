@@ -1,6 +1,7 @@
 package pomato.app.customer.dto.Request;
 
 import jakarta.validation.constraints.*;
+import pomato.app.customer.Entity.UserRoles;
 import java.time.LocalDate;
 
 public class UserRequestDto {
@@ -31,8 +32,8 @@ public class UserRequestDto {
     @NotBlank(message = "Password can't be blank.")
     @Size(
             min = 8,
-            max = 100,
-            message = "Password must be between 8 and 100 characters."
+            max = 30,
+            message = "Password must be between 8 and 30 characters."
     )
     private String password;
 
@@ -44,10 +45,16 @@ public class UserRequestDto {
     )
     private String phone;
 
+    @NotNull(message = "Account type is required.")
+    private UserRoles role;
+
 
     @NotNull(message = "Date of birth can't be null.")
     @Past(message = "Date of birth must be in the past.")
     private LocalDate dateOfBirth;
+
+    public UserRequestDto() {
+    }
 
     public UserRequestDto(LocalDate dateOfBirth, String email, String firstName, String lastName, String password, String phone) {
         this.dateOfBirth = dateOfBirth;
@@ -98,6 +105,14 @@ public class UserRequestDto {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public UserRoles getRole() {
+        return role;
+    }
+
+    public void setRole(UserRoles role) {
+        this.role = role;
     }
 
     public String getPassword() {

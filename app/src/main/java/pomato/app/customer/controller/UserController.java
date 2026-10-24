@@ -34,9 +34,7 @@ public class UserController {
         user.setPassword(request.getPassword());
         user.setPhoneNumber(request.getPhone());
         user.setDateOfBirth(request.getDateOfBirth());
-        user.setRole(UserRoles.Customer);
-
-        Users saveduser=userService.createUser(user);
+        Users saveduser=userService.createUser(user, request.getRole());
 
         UserResponseDto response = new UserResponseDto();
         response.setUserId(saveduser.getUserId());
